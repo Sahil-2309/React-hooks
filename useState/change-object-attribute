@@ -1,0 +1,34 @@
+import React, { useState } from 'react'
+import data from '../../../data'
+
+const UseStateObject = () => {
+  const [person, setPerson] = useState(data)
+
+  console.log(person)
+
+  const changeMessage = (id) => {
+    let newPeople = person.filter((people) => people.id === id)
+    console.log('...', newPeople)
+
+    var objCopy = [...person]
+    objCopy[id].message = 'Change ho gya'
+    setPerson(objCopy)
+  }
+
+  return (
+    <div>
+      {person && person.map((people, index) => {
+        const { id, name, message } = people
+        return (
+          <div key={id} className='item'>
+            <h3>{name}</h3>
+            <h2>{message}</h2>
+            <button onClick={() => changeMessage(index)}>Change message</button>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+export default UseStateObject
